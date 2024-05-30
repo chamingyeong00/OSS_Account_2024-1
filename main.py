@@ -1,6 +1,3 @@
-import json
-from datetime import datetime
-
 b_is_exit = False
 
 # 가계부 데이터 저장 변수
@@ -14,8 +11,6 @@ def print_help():
     3: 월별 보고서 생성
     4: 예산 설정 및 초과 알림
     5: 지출 카테고리 분석
-    6: 데이터 저장
-    7: 데이터 로드
     ?: 도움말 출력
     exit: 종료
     """)
@@ -70,19 +65,6 @@ def analyze_categories():
     for category, total in category_totals.items():
         print(f"{category}: {total} 원")
 
-# 데이터 저장 함수
-def save_data():
-    with open("ledger.json", "w") as f:
-        json.dump(ledger, f)
-    print("데이터가 저장되었습니다.")
-
-# 데이터 로드 함수
-def load_data():
-    global ledger
-    with open("ledger.json", "r") as f:
-        ledger = json.load(f)
-    print("데이터가 로드되었습니다.")
-
 # 메인 루프
 while not b_is_exit:
     func = input("기능 입력 (? 입력시 도움말) : ")
@@ -97,10 +79,6 @@ while not b_is_exit:
         set_budget()
     elif func == "5":
         analyze_categories()
-    elif func == "6":
-        save_data()
-    elif func == "7":
-        load_data()
     elif func == "?":
         print_help()
     elif func == "exit":
